@@ -12,6 +12,8 @@ import javax.swing.JLabel;
  */
 public class VentanaJuego extends JFrame{
     private PanelConImagen jpFondoJuego;
+    private JLabel lblJugador1;
+    private JLabel lblJugador2;
     private JLabel label1 ;
     private JLabel label2 ;
     private JLabel label3 ;
@@ -23,6 +25,7 @@ public class VentanaJuego extends JFrame{
     private JLabel label9 ;
     private JLabel lblRonda;
     private JLabel lblNumRonda;
+    private JButton btnFinalizar;
     
     
     
@@ -48,6 +51,8 @@ public class VentanaJuego extends JFrame{
         jpFondoJuego.setLayout(null);
         add(jpFondoJuego);
         lblRonda = new JLabel();
+        lblJugador1 = new JLabel();
+        lblJugador2 = new JLabel();
         label1 = new JLabel();
         label2 = new JLabel();
         label3 = new JLabel();
@@ -58,10 +63,19 @@ public class VentanaJuego extends JFrame{
         label8 = new JLabel();
         label9 = new JLabel();
         lblNumRonda = new JLabel();
+        btnFinalizar = new JButton();
         
         lblRonda.setBounds(500,30, 291,94);
         ImageIcon icono = new ImageIcon("src/ronda.png");
         lblRonda.setIcon(icono);
+        
+        icono = new ImageIcon("src/Jugador1.png");
+        lblJugador1.setIcon(icono);
+        lblJugador1.setBounds(500,200, 291,94);
+            
+        icono = new ImageIcon("src/Jugador2.png");
+        lblJugador2.setIcon(icono);
+        lblJugador2.setBounds(500,300, 291,94);
 
         
         lblNumRonda.setBounds(620,130, 41,41);
@@ -96,7 +110,14 @@ public class VentanaJuego extends JFrame{
         label9.setBounds(350,371, 145,145);
         label9.setIcon(icono);
         
+        icono = new ImageIcon("src/finalizar.png");
+        btnFinalizar.setIcon(icono);
+        btnFinalizar.setContentAreaFilled(false);
+        btnFinalizar.setBounds(520,450, 250,75);
         
+        
+        jpFondoJuego.add( lblJugador1);        
+        jpFondoJuego.add( lblJugador2);        
         jpFondoJuego.add( label1);
         jpFondoJuego.add( label2);
         jpFondoJuego.add( label3);
@@ -108,6 +129,7 @@ public class VentanaJuego extends JFrame{
         jpFondoJuego.add( label9);
         jpFondoJuego.add( lblRonda);
         jpFondoJuego.add( lblNumRonda);
+        jpFondoJuego.add( btnFinalizar);
         
  
         

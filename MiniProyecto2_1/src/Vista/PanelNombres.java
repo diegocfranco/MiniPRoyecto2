@@ -143,13 +143,13 @@ public final class PanelNombres extends JFrame {
             ImageIcon icono = new ImageIcon("src/Jugador1.png");
             lblJugador1.setIcon(icono);
             
+            icono = new ImageIcon("src/Jugador2.png");
+            lblJugador2.setIcon(icono);
+            
             icono = new ImageIcon("src/iniciar.png");
             btnIniciar.setIcon(icono);
             btnIniciar.setContentAreaFilled(false);        
             
-                  
-            icono = new ImageIcon("src/Jugador2.png");
-            lblJugador2.setIcon(icono);
             
             icono = new ImageIcon("src/rondas.png");
             lblNumeroRondas.setIcon(icono);
@@ -185,8 +185,7 @@ public final class PanelNombres extends JFrame {
             btnRonda2.setBounds(595,390, 41,41);
             btnRonda3.setBounds(650,390, 41,41);
             btnRonda4.setBounds(705,390, 41,41);
-            
-             btnIniciar.setBounds(545,450, 193,75);
+            btnIniciar.setBounds(545,450, 193,75);
 
             
             jpFondoNombres.add(btnIniciar);
