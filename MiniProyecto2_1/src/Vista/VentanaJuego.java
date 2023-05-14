@@ -1,6 +1,12 @@
 package Vista;
 
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -131,8 +137,102 @@ public class VentanaJuego extends JFrame{
         jpFondoJuego.add( lblNumRonda);
         jpFondoJuego.add( btnFinalizar);
         
+        VentanaJuego.ManejadorDeEventos manejadorEventos = new VentanaJuego.ManejadorDeEventos();
+        
+        label1.addMouseListener(manejadorEventos);
+        label2.addMouseListener(manejadorEventos);
+        label3.addMouseListener(manejadorEventos);
+        label4.addMouseListener(manejadorEventos);
+        label5.addMouseListener(manejadorEventos);
+        label6.addMouseListener(manejadorEventos);
+        label7.addMouseListener(manejadorEventos);
+        label8.addMouseListener(manejadorEventos);
+        label9.addMouseListener(manejadorEventos);        
+        
+        
  
         
 }
-    
+        class ManejadorDeEventos implements ActionListener, KeyListener,MouseListener{
+        @Override
+        public void actionPerformed(ActionEvent evento){           
+
+        }
+        
+        @Override
+        public void keyReleased(KeyEvent e) {
+           /* System.out.println("Se liberó la tecla " + e.getKeyChar() +
+                    " Con codigo " + e.getKeyCode());*/
+
+        }
+        
+        @Override
+        public void keyPressed(KeyEvent e) {
+            /*System.out.println("Se presionó la tecla " + e.getKeyChar()+
+                    " Con codigo " + e.getKeyCode());*/
+            
+        }
+        
+        @Override
+        public void keyTyped(KeyEvent e) {
+            /*System.out.println("Se digitó la tecla " + e.getKeyChar()+
+                    " Con codigo " + e.getKeyCode());*/
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            
+            if(e.getSource() == label1){
+                label1.setIcon(new ImageIcon("src/x.png"));
+            }
+            if(e.getSource() == label2){
+                label2.setIcon(new ImageIcon("src/o.png"));
+            }
+            if(e.getSource() == label3){
+                label3.setIcon(new ImageIcon("src/x.png"));
+            }
+            if(e.getSource() == label4){
+                label4.setIcon(new ImageIcon("src/o.png"));
+            }
+            if(e.getSource() == label5){
+                label5.setIcon(new ImageIcon("src/x.png"));
+            }
+            if(e.getSource() == label6){
+                label6.setIcon(new ImageIcon("src/o.png"));
+            }
+            if(e.getSource() == label7){
+                label7.setIcon(new ImageIcon("src/x.png"));
+            }
+            if(e.getSource() == label8){
+                label8.setIcon(new ImageIcon("src/o.png"));
+            }
+            if(e.getSource() == label9){
+                label9.setIcon(new ImageIcon("src/x.png"));
+            }            
+                
+          
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+           
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+            
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {         
+            
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            
+           
+        }
+               
+    } 
 }
