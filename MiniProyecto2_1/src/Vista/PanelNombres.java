@@ -1,6 +1,6 @@
 package Vista;
 
-
+import Modelo.Jugador;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -222,6 +222,7 @@ public final class PanelNombres extends JFrame {
         String nombre =jTextJugador1.getText();
         if(!nombre.trim().isEmpty() || nombre.trim().length() > 0){
             //pasar nombre y numero de rondas
+            Jugador jugador = new Jugador(nombre);
             dispose();
             JOptionPane.showMessageDialog(null,numeroRonda);
             VentanaJuego VentanaUnJugador = new VentanaJuego(); 
@@ -239,6 +240,8 @@ public final class PanelNombres extends JFrame {
         String nombre2 =jTextJugador2.getText();
         if(!nombre1.trim().isEmpty()&!nombre2.trim().isEmpty() ){
             //pasar nombre y numero de rondas
+            Jugador jugador1 = new Jugador(nombre1);
+            Jugador jugador2 = new Jugador(nombre2);
             dispose();
             JOptionPane.showMessageDialog(null,numeroRonda);
             VentanaJuego VentanaUnJugador = new VentanaJuego(); 
