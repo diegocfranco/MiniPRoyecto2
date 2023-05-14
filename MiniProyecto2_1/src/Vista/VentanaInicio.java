@@ -118,7 +118,6 @@ public final class VentanaInicio extends JFrame {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        VentanaJuego ventanaJuego = new VentanaJuego();
         VentanaInicio ventana = new VentanaInicio();
     }
     

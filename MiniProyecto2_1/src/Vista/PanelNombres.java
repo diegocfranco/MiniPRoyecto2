@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 
 
@@ -20,7 +21,6 @@ public final class PanelNombres extends JFrame {
     
     
     private PanelConImagen jpFondoNombres;
-    private JButton btnIniciar;
     private JLabel lblNumeroRondas;
     private JButton btnRonda1;
     private JButton btnRonda2;
@@ -30,6 +30,9 @@ public final class PanelNombres extends JFrame {
     private JLabel lblJugador2;
     private JTextField jTextJugador1;
     private JTextField jTextJugador2 ;
+    private int numeroRonda;
+    private int jugadores;
+    
     
 
     
@@ -62,10 +65,9 @@ public final class PanelNombres extends JFrame {
         
 }
     public void unJugador(){
-
+        jugadores=1;
         lblJugador1 = new JLabel();
         jTextJugador1 = new JTextField();
-        btnIniciar = new JButton();
         lblNumeroRondas = new JLabel();
         btnRonda1 = new JButton();
         btnRonda2 = new JButton();
@@ -76,10 +78,7 @@ public final class PanelNombres extends JFrame {
         
         ImageIcon icono = new ImageIcon("src/Jugador1.png");
         lblJugador1.setIcon(icono);
-        
-        icono = new ImageIcon("src/iniciar.png");
-        btnIniciar.setIcon(icono);
-        btnIniciar.setContentAreaFilled(false);        
+            
             
         icono = new ImageIcon("src/rondas.png");
         lblNumeroRondas.setIcon(icono);
@@ -104,7 +103,6 @@ public final class PanelNombres extends JFrame {
         
         lblJugador1.setBounds(520,145, 259,83);    
         jTextJugador1.setBounds(520,245, 250,44);
-        btnIniciar.setBounds(545,450, 193,75);
         lblNumeroRondas.setBounds(540,300, 259,83);
         btnRonda1.setBounds(540,380, 41,41);
         btnRonda2.setBounds(595,380, 41,41);
@@ -112,14 +110,20 @@ public final class PanelNombres extends JFrame {
         btnRonda4.setBounds(705,380, 41,41);
         
         
-        jpFondoNombres.add(btnIniciar);
         jpFondoNombres.add(lblJugador1);
         jpFondoNombres.add(jTextJugador1);
         jpFondoNombres.add(lblNumeroRondas);
         jpFondoNombres.add(btnRonda1);
         jpFondoNombres.add(btnRonda2);
         jpFondoNombres.add(btnRonda3);
-        jpFondoNombres.add(btnRonda4);        
+        jpFondoNombres.add(btnRonda4);
+
+        PanelNombres.ManejadorDeEventos manejadorEventos = new PanelNombres.ManejadorDeEventos();
+        
+        btnRonda1.addActionListener(manejadorEventos);
+        btnRonda2.addActionListener(manejadorEventos);
+        btnRonda3.addActionListener(manejadorEventos);
+        btnRonda4.addActionListener(manejadorEventos);            
         
         
         
@@ -127,12 +131,11 @@ public final class PanelNombres extends JFrame {
         
     }
     public void dosJugadores(){
-        
+            jugadores = 2;
             btnRonda1 = new JButton();
             btnRonda2 = new JButton();
             btnRonda3 = new JButton();
             btnRonda4 = new JButton();  
-            btnIniciar = new JButton();
             lblNumeroRondas = new JLabel();
             lblJugador1 = new JLabel();
             lblJugador2 = new JLabel();
@@ -145,11 +148,7 @@ public final class PanelNombres extends JFrame {
             
             icono = new ImageIcon("src/Jugador2.png");
             lblJugador2.setIcon(icono);
-            
-            icono = new ImageIcon("src/iniciar.png");
-            btnIniciar.setIcon(icono);
-            btnIniciar.setContentAreaFilled(false);        
-            
+                        
             
             icono = new ImageIcon("src/rondas.png");
             lblNumeroRondas.setIcon(icono);
@@ -185,10 +184,9 @@ public final class PanelNombres extends JFrame {
             btnRonda2.setBounds(595,390, 41,41);
             btnRonda3.setBounds(650,390, 41,41);
             btnRonda4.setBounds(705,390, 41,41);
-            btnIniciar.setBounds(545,450, 193,75);
 
             
-            jpFondoNombres.add(btnIniciar);
+
             jpFondoNombres.add(lblJugador1);
             jpFondoNombres.add(lblJugador2);
             jpFondoNombres.add(jTextJugador2);
@@ -198,15 +196,101 @@ public final class PanelNombres extends JFrame {
             jpFondoNombres.add(btnRonda2);
             jpFondoNombres.add(btnRonda3);
             jpFondoNombres.add(btnRonda4);
+            
+            PanelNombres.ManejadorDeEventos manejadorEventos = new PanelNombres.ManejadorDeEventos();
+        
+            btnRonda1.addActionListener(manejadorEventos);
+            btnRonda2.addActionListener(manejadorEventos);
+            btnRonda3.addActionListener(manejadorEventos);
+            btnRonda4.addActionListener(manejadorEventos);          
+            
     }
+    
+    private void iniciarJuego(){
+        
+        if (jugadores ==1){
+            iniciarJuegoUnJugador();
+        }
+        else if(jugadores ==2){
+            iniciarJuegodosJugadores();
+        }
+        
+    }
+    
+    
+    private void iniciarJuegoUnJugador(){
+        String nombre =jTextJugador1.getText();
+        if(!nombre.trim().isEmpty() || nombre.trim().length() > 0){
+            //pasar nombre y numero de rondas
+            dispose();
+            JOptionPane.showMessageDialog(null,numeroRonda);
+            VentanaJuego VentanaUnJugador = new VentanaJuego(); 
+          
+        } 
+        else {
+            JOptionPane.showMessageDialog(null,"Por favor ingrese su nombre", 
+                    "Advertencia", JOptionPane.ERROR_MESSAGE);
+            jTextJugador1.requestFocusInWindow();
+        }
+    }
+    
+        private void iniciarJuegodosJugadores(){
+        String nombre1 =jTextJugador1.getText();
+        String nombre2 =jTextJugador2.getText();
+        if(!nombre1.trim().isEmpty()&!nombre2.trim().isEmpty() ){
+            //pasar nombre y numero de rondas
+            dispose();
+            JOptionPane.showMessageDialog(null,numeroRonda);
+            VentanaJuego VentanaUnJugador = new VentanaJuego(); 
+          
+        } 
+        else {
+            if(nombre1.trim().isEmpty()&nombre2.trim().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Por favor ingrese el nombre de los Jugadores ", 
+                    "Advertencia", JOptionPane.ERROR_MESSAGE);
+            jTextJugador1.requestFocusInWindow();
+             }
+            
+            else if(nombre1.trim().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Por favor ingrese el nombre del Jugador 1", 
+                    "Advertencia", JOptionPane.ERROR_MESSAGE);
+            jTextJugador1.requestFocusInWindow();
+             }
+            else if(nombre2.trim().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Por favor ingrese el nombre del Jugador 2", 
+                    "Advertencia", JOptionPane.ERROR_MESSAGE);
+            jTextJugador2.requestFocusInWindow();
+             }            
+        }   
+       
+    }
+    
       
     
-            class ManejadorDeEventos implements ActionListener, KeyListener{
+    class ManejadorDeEventos implements ActionListener, KeyListener{
         @Override
         public void actionPerformed(ActionEvent evento){
-           
+            if(evento.getSource() == btnRonda1){
+                numeroRonda=1;
+                iniciarJuego();
             
-        
+            }
+            if(evento.getSource() == btnRonda2){
+                numeroRonda=2;
+                iniciarJuego();
+                        
+            }
+            if(evento.getSource() == btnRonda3){
+                numeroRonda=3;
+                iniciarJuego();
+            
+            }
+            if(evento.getSource() == btnRonda4){
+                numeroRonda=4;
+                iniciarJuego();
+                          
+            }            
+
         }
         
         @Override
