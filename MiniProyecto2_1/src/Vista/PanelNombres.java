@@ -65,7 +65,7 @@ public final class PanelNombres extends JFrame {
 
         lblJugador1 = new JLabel();
         jTextJugador1 = new JTextField();
-        btnIniciar = new JButton("iniciar");
+        btnIniciar = new JButton();
         lblNumeroRondas = new JLabel();
         btnRonda1 = new JButton();
         btnRonda2 = new JButton();
@@ -76,6 +76,10 @@ public final class PanelNombres extends JFrame {
         
         ImageIcon icono = new ImageIcon("src/Jugador1.png");
         lblJugador1.setIcon(icono);
+        
+        icono = new ImageIcon("src/iniciar.png");
+        btnIniciar.setIcon(icono);
+        btnIniciar.setContentAreaFilled(false);        
             
         icono = new ImageIcon("src/rondas.png");
         lblNumeroRondas.setIcon(icono);
@@ -100,7 +104,7 @@ public final class PanelNombres extends JFrame {
         
         lblJugador1.setBounds(520,145, 259,83);    
         jTextJugador1.setBounds(520,245, 250,44);
-        btnIniciar.setBounds(520,450, 250,44);
+        btnIniciar.setBounds(545,450, 193,75);
         lblNumeroRondas.setBounds(540,300, 259,83);
         btnRonda1.setBounds(540,380, 41,41);
         btnRonda2.setBounds(595,380, 41,41);
@@ -128,6 +132,7 @@ public final class PanelNombres extends JFrame {
             btnRonda2 = new JButton();
             btnRonda3 = new JButton();
             btnRonda4 = new JButton();  
+            btnIniciar = new JButton();
             lblNumeroRondas = new JLabel();
             lblJugador1 = new JLabel();
             lblJugador2 = new JLabel();
@@ -137,6 +142,11 @@ public final class PanelNombres extends JFrame {
             
             ImageIcon icono = new ImageIcon("src/Jugador1.png");
             lblJugador1.setIcon(icono);
+            
+            icono = new ImageIcon("src/iniciar.png");
+            btnIniciar.setIcon(icono);
+            btnIniciar.setContentAreaFilled(false);        
+            
                   
             icono = new ImageIcon("src/Jugador2.png");
             lblJugador2.setIcon(icono);
@@ -165,19 +175,18 @@ public final class PanelNombres extends JFrame {
 
             
             lblJugador1.setBounds(520,45, 259,83);
-            lblJugador2.setBounds(520,215, 259,83);
+            lblJugador2.setBounds(520,195, 259,83);
             
             jTextJugador1.setBounds(520,125, 250,44);
-            jTextJugador2.setBounds(520,290, 250,44);
+            jTextJugador2.setBounds(520,270, 250,44);
             
-            lblNumeroRondas.setBounds(540,350, 259,83);
-            btnRonda1.setBounds(540,420, 41,41);
-            btnRonda2.setBounds(595,420, 41,41);
-            btnRonda3.setBounds(650,420, 41,41);
-            btnRonda4.setBounds(705,420, 41,41);
+            lblNumeroRondas.setBounds(540,320, 259,83);
+            btnRonda1.setBounds(540,390, 41,41);
+            btnRonda2.setBounds(595,390, 41,41);
+            btnRonda3.setBounds(650,390, 41,41);
+            btnRonda4.setBounds(705,390, 41,41);
             
-            btnIniciar = new JButton("iniciar Juego");
-            btnIniciar.setBounds(520,490, 250,44);
+             btnIniciar.setBounds(545,450, 193,75);
 
             
             jpFondoNombres.add(btnIniciar);
