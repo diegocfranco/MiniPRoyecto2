@@ -53,7 +53,7 @@ public class VentanaJuego extends JFrame{
      public VentanaJuego(Jugador jugador,int numeroRonda){
         jugadorT = jugador;
         tablero = new Tablero();
-        partida=numeroRonda+1;
+        partida=numeroRonda;
         iniciarComponentes();
     }
     
@@ -169,18 +169,20 @@ public class VentanaJuego extends JFrame{
 }
     public void alguienGano(){
         char temporal=tablero.ganador();
+        ImprimeTablero();
         if(temporal=='x'){
             jugadorT.setPuntaje1();
             JOptionPane.showMessageDialog(null,"El jugador "+ jugadorT.getNombre1() + " gano¡");
             turno=0;
             tablero.reiniciarTablero();
-            ronda++;
-            if(ronda==partida){ 
+            
+            if(ronda>=partida){ 
                 dispose();
                 Estadisticas();          
             }
-            ImageIcon icono  = new ImageIcon("src/"+ronda+".png");
-            lblNumRonda.setIcon(icono);
+            ronda++;
+            //ImageIcon icono  = new ImageIcon("src/"+ronda+".png");
+            //lblNumRonda.setIcon(icono);
             ImprimeTablero();   
         }
         else if(temporal=='o'){
@@ -188,15 +190,17 @@ public class VentanaJuego extends JFrame{
             JOptionPane.showMessageDialog(null,"El jugador "+ jugadorT.getNombre2() + " gano¡");
             turno=0;
             tablero.reiniciarTablero();
-            ronda++;
-            if(ronda==partida){ 
+            
+            if(ronda>=partida){ 
                 dispose();
                 Estadisticas();}
-            ImageIcon icono  = new ImageIcon("src/"+ronda+".png");
-            lblNumRonda.setIcon(icono);
+            ronda++;
+            //ImageIcon icono  = new ImageIcon("src/"+ronda+".png");
+            //lblNumRonda.setIcon(icono);
             ImprimeTablero();
             
         }
+        
     }
     
     public void Estadisticas(){
@@ -210,7 +214,7 @@ public class VentanaJuego extends JFrame{
         else if(jugadorT.getPuntaje2()== jugadorT.getPuntaje1()){
             ganador= "Empate entre  "+jugadorT.getNombre1()+" y "+jugadorT.getNombre2();
         }
-        JOptionPane.showMessageDialog(null,"ESTADISTICAS:\nRondas Jugadas:"+(ronda-1)+"\n"
+        JOptionPane.showMessageDialog(null,"ESTADISTICAS:\nRondas Jugadas:"+(ronda)+"\n"
                 + "Puntaje Jugador 1 "+jugadorT.getNombre1()+" :"+jugadorT.getPuntaje1()+"\n"
                 + "Puntaje Jugador 2 "+jugadorT.getNombre2()+" :"+jugadorT.getPuntaje2()+"\n"
                 + ganador
@@ -238,21 +242,31 @@ public class VentanaJuego extends JFrame{
         label8.setIcon(icono);
         icono = new ImageIcon("src/"+ tablero.getPosTablero(2,2)+".png");        
         label9.setIcon(icono);
+        icono  = new ImageIcon("src/"+ronda+".png");
+        lblNumRonda.setIcon(icono);
+        
                
     
     }
     public void Empate(){
-        if (turno == 10){
-            turno=0;
-            tablero.reiniciarTablero();
-            ronda++;   
+        if (turno == 9){
+            if(ronda>=partida){ 
+                dispose();
+                Estadisticas();
+            }
+            else{
+                ronda++;
+                turno=0;
+                tablero.reiniciarTablero();
+                ImprimeTablero();
+            }
         }
         
         
     }
     
     public void Robot(){
-        if(jugadorT.getNombre2()=="Robot"){
+        if(jugadorT.getNombre2()=="Robot"&& turno<8){
             int a =0;
             Random random = new Random();
             turno++;
@@ -309,10 +323,10 @@ public class VentanaJuego extends JFrame{
             if(e.getSource() == label1){
                 if(tablero.fichaPorTurno(turno,0,0)){
                     tablero.getCambioAFalse();
+                    alguienGano();
                     Robot();
                     ImprimeTablero();
                     turno++;
-                    alguienGano();
                     Empate();
                     
                 }
@@ -321,10 +335,10 @@ public class VentanaJuego extends JFrame{
             if(e.getSource() == label2){
                 if(tablero.fichaPorTurno(turno,0,1)){
                     tablero.getCambioAFalse();
-                    Robot();
-                    ImprimeTablero();
-                    turno++;
                     alguienGano();
+                    Robot();
+                    turno++;
+                    ImprimeTablero();
                     Empate();
                 }
                 
@@ -332,10 +346,10 @@ public class VentanaJuego extends JFrame{
             if(e.getSource() == label3){
                 if(tablero.fichaPorTurno(turno,0,2)){
                     tablero.getCambioAFalse();
+                    alguienGano();
                     Robot();
                     ImprimeTablero();
                     turno++;
-                    alguienGano();
                     Empate();
                 }
                 
@@ -343,10 +357,10 @@ public class VentanaJuego extends JFrame{
             if(e.getSource() == label4){
                 if(tablero.fichaPorTurno(turno,1,0)){
                     tablero.getCambioAFalse();
+                    alguienGano();
                     Robot();
                     ImprimeTablero();
-                    turno++;
-                    alguienGano();
+                    turno++;         
                     Empate();
                 }    
                 
@@ -354,10 +368,10 @@ public class VentanaJuego extends JFrame{
             if(e.getSource() == label5){
                 if(tablero.fichaPorTurno(turno,1,1)){
                     tablero.getCambioAFalse();
+                    alguienGano();
                     Robot();
                     ImprimeTablero();
                     turno++;
-                    alguienGano();
                     Empate();
                 }
                 
@@ -365,19 +379,20 @@ public class VentanaJuego extends JFrame{
             if(e.getSource() == label6){
                 if(tablero.fichaPorTurno(turno,1,2)){
                     tablero.getCambioAFalse();
+                    alguienGano();
                     Robot();
                     ImprimeTablero();
                     turno++;                    
-                    alguienGano();
                     Empate();
             }
             }
             if(e.getSource() == label7){
                 if(tablero.fichaPorTurno(turno,2,0)){
+                    tablero.getCambioAFalse();
+                    alguienGano();
                     Robot();
                     ImprimeTablero();
                     turno++;
-                    alguienGano();
                     Empate();
                 }
                 
@@ -385,10 +400,10 @@ public class VentanaJuego extends JFrame{
             if(e.getSource() == label8){
                 if(tablero.fichaPorTurno(turno,2,1)){
                     tablero.getCambioAFalse();
+                    alguienGano();
                     Robot();
                     ImprimeTablero();
                     turno++;
-                    alguienGano();
                     Empate();
                 }
                
@@ -396,10 +411,10 @@ public class VentanaJuego extends JFrame{
             if(e.getSource() == label9){
                 if(tablero.fichaPorTurno(turno,2,2)){
                     tablero.getCambioAFalse();
+                    alguienGano();
                     Robot();
                     ImprimeTablero();
                     turno++;
-                    alguienGano();
                     Empate();
                 } 
             }
