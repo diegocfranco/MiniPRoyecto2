@@ -16,6 +16,8 @@ import Logica.Tablero;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JOptionPane;
+import java.util.Random;
+
 
 /**
  *
@@ -44,6 +46,7 @@ public class VentanaJuego extends JFrame{
     private int turno; 
     private int ronda;
     private int partida;
+    
     
     
     
@@ -159,7 +162,8 @@ public class VentanaJuego extends JFrame{
         label6.addMouseListener(manejadorEventos);
         label7.addMouseListener(manejadorEventos);
         label8.addMouseListener(manejadorEventos);
-        label9.addMouseListener(manejadorEventos);        
+        label9.addMouseListener(manejadorEventos);
+        btnFinalizar.addMouseListener(manejadorEventos);          
         
        
 }
@@ -237,6 +241,38 @@ public class VentanaJuego extends JFrame{
                
     
     }
+    public void Empate(){
+        if (turno == 10){
+            turno=0;
+            tablero.reiniciarTablero();
+            ronda++;   
+        }
+        
+        
+    }
+    
+    public void Robot(){
+        if(jugadorT.getNombre2()=="Robot"){
+            int a =0;
+            Random random = new Random();
+            turno++;
+            while(a==0){
+                int pos1=random.nextInt(3);
+                int pos2=random.nextInt(3);
+                
+                if(tablero.getPosTablero(pos1 , pos2)==' '){
+                    tablero.fichaPorTurno(turno, pos1, pos2);
+                    tablero.getCambioAFalse();
+                    break;   
+                }
+                
+                
+            }
+            
+        }
+            
+        
+    }
     
     
     
@@ -271,58 +307,105 @@ public class VentanaJuego extends JFrame{
         public void mouseClicked(MouseEvent e) {
             
             if(e.getSource() == label1){
-                tablero.fichaPorTurno(turno,0,0);
-                ImprimeTablero();
-                turno++;
-                alguienGano();
+                if(tablero.fichaPorTurno(turno,0,0)){
+                    tablero.getCambioAFalse();
+                    Robot();
+                    ImprimeTablero();
+                    turno++;
+                    alguienGano();
+                    Empate();
+                    
+                }
+                
             }
             if(e.getSource() == label2){
-                tablero.fichaPorTurno(turno,0,1);
-                ImprimeTablero();
-                turno++;
-                alguienGano();
+                if(tablero.fichaPorTurno(turno,0,1)){
+                    tablero.getCambioAFalse();
+                    Robot();
+                    ImprimeTablero();
+                    turno++;
+                    alguienGano();
+                    Empate();
+                }
+                
             }
             if(e.getSource() == label3){
-                tablero.fichaPorTurno(turno,0,2);
-                ImprimeTablero();
-                turno++;
-                alguienGano();
+                if(tablero.fichaPorTurno(turno,0,2)){
+                    tablero.getCambioAFalse();
+                    Robot();
+                    ImprimeTablero();
+                    turno++;
+                    alguienGano();
+                    Empate();
+                }
+                
             }
             if(e.getSource() == label4){
-                tablero.fichaPorTurno(turno,1,0);
-                ImprimeTablero();
-                turno++;
-                alguienGano();
+                if(tablero.fichaPorTurno(turno,1,0)){
+                    tablero.getCambioAFalse();
+                    Robot();
+                    ImprimeTablero();
+                    turno++;
+                    alguienGano();
+                    Empate();
+                }    
+                
             }
             if(e.getSource() == label5){
-                tablero.fichaPorTurno(turno,1,1);
-                ImprimeTablero();
-                turno++;
-                alguienGano();
+                if(tablero.fichaPorTurno(turno,1,1)){
+                    tablero.getCambioAFalse();
+                    Robot();
+                    ImprimeTablero();
+                    turno++;
+                    alguienGano();
+                    Empate();
+                }
+                
             }
             if(e.getSource() == label6){
-                tablero.fichaPorTurno(turno,1,2);
-                ImprimeTablero();
-                turno++;
-                alguienGano();
+                if(tablero.fichaPorTurno(turno,1,2)){
+                    tablero.getCambioAFalse();
+                    Robot();
+                    ImprimeTablero();
+                    turno++;                    
+                    alguienGano();
+                    Empate();
+            }
             }
             if(e.getSource() == label7){
-                tablero.fichaPorTurno(turno,2,0);
-                ImprimeTablero();
-                turno++;
-                alguienGano();
+                if(tablero.fichaPorTurno(turno,2,0)){
+                    Robot();
+                    ImprimeTablero();
+                    turno++;
+                    alguienGano();
+                    Empate();
+                }
+                
             }
             if(e.getSource() == label8){
-                tablero.fichaPorTurno(turno,2,1);
-                ImprimeTablero();
-                turno++;
-                alguienGano();
+                if(tablero.fichaPorTurno(turno,2,1)){
+                    tablero.getCambioAFalse();
+                    Robot();
+                    ImprimeTablero();
+                    turno++;
+                    alguienGano();
+                    Empate();
+                }
+               
             }
             if(e.getSource() == label9){
-                tablero.fichaPorTurno(turno,2,2);
-                ImprimeTablero();
-                turno++;
-                alguienGano();
+                if(tablero.fichaPorTurno(turno,2,2)){
+                    tablero.getCambioAFalse();
+                    Robot();
+                    ImprimeTablero();
+                    turno++;
+                    alguienGano();
+                    Empate();
+                } 
+            }
+            if(e.getSource() == btnFinalizar){
+                   dispose();
+                   Estadisticas();
             }            
                 
           

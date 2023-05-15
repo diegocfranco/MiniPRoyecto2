@@ -222,7 +222,7 @@ public final class PanelNombres extends JFrame {
         String nombre =jTextJugador1.getText();
         if(!nombre.trim().isEmpty() || nombre.trim().length() > 0){
             //pasar nombre y numero de rondas
-            Jugador jugador = new Jugador(nombre);
+            Jugador jugador = new Jugador(nombre,"Robot");
             dispose();
             VentanaJuego VentanaUnJugador = new VentanaJuego(jugador,numeroRonda); 
           

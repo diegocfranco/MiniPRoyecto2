@@ -14,12 +14,16 @@ public class Tablero {
                                       {' ',' ',' '},
                                       {' ',' ',' '}
                                     } ;
+    boolean cambio=false;
     
     
     public Tablero(){
        
     }
-    
+    public void getCambioAFalse(){
+        
+        cambio= false;
+    }
     public char ganador(){
         char ganador =' ';
         for(int i=0;i<3;i++){
@@ -62,26 +66,31 @@ public class Tablero {
     private void setX(int posx,int posy){
         
         if(matrizTablero[posx][posy]!='o' &&matrizTablero[posx][posy]!='x' ){
-            matrizTablero[posx][posy]='x';}
+            matrizTablero[posx][posy]='x';
+            cambio=true;
+        }
         
     }
 
     private void setO(int posx,int posy){
         
         if(matrizTablero[posx][posy]!='o' &&matrizTablero[posx][posy]!='x' ){
-            matrizTablero[posx][posy]='o';}
+            matrizTablero[posx][posy]='o';
+            cambio=true;
+        }
 
     }
     
  
-  public void fichaPorTurno(int turno,int posx,int posy){
+  public boolean fichaPorTurno(int turno,int posx,int posy){
   
       if(turno%2==0){
           setX(posx,posy);
       }
       if(turno%2==1){
           setO(posx,posy);
-      }      
+      } 
+      return cambio;
   }
     
     
