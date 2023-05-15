@@ -20,23 +20,23 @@ public class Tablero {
        
     }
     
-    public boolean ganador(){
-        boolean ganador =false;
+    public char ganador(){
+        char ganador =' ';
         for(int i=0;i<3;i++){
             if(matrizTablero[i][0]==matrizTablero[i][1]&& matrizTablero[i][0]==matrizTablero[i][2]&&matrizTablero[i][2]!=' '){
-                ganador=true;
+                ganador=matrizTablero[i][0];
                 break;
             }
             else if(matrizTablero[0][i]==matrizTablero[1][i]&& matrizTablero[0][i]==matrizTablero[2][i]&&matrizTablero[0][i]!=' '){
-                ganador=true;
+                ganador=matrizTablero[0][i];
                 break;
             } 
             else if(matrizTablero[0][0]==matrizTablero[1][1]&& matrizTablero[0][0]==matrizTablero[2][2]&&matrizTablero[0][0]!=' '){
-                ganador=true;
+                ganador=matrizTablero[0][0];
                 break;
             }
             else if(matrizTablero[0][2]==matrizTablero[1][1]&& matrizTablero[0][2]==matrizTablero[2][0]&&matrizTablero[0][2]!=' '){
-                ganador=true;
+                ganador=matrizTablero[0][2];
                 break;
             } 
         }

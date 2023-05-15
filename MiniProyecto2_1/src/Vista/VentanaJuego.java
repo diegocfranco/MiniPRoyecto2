@@ -43,12 +43,14 @@ public class VentanaJuego extends JFrame{
     private Tablero tablero;
     private int turno; 
     private int ronda;
+    private int partida;
     
     
     
-     public VentanaJuego(Jugador jugador){
+     public VentanaJuego(Jugador jugador,int numeroRonda){
         jugadorT = jugador;
         tablero = new Tablero();
+        partida=numeroRonda+1;
         iniciarComponentes();
     }
     
@@ -162,17 +164,53 @@ public class VentanaJuego extends JFrame{
        
 }
     public void alguienGano(){
-        
-        if(tablero.ganador()){
-            JOptionPane.showMessageDialog(null,"alguien gano¡");
+        char temporal=tablero.ganador();
+        if(temporal=='x'){
+            jugadorT.setPuntaje1();
+            JOptionPane.showMessageDialog(null,"El jugador "+ jugadorT.getNombre1() + " gano¡");
             turno=0;
             tablero.reiniciarTablero();
             ronda++;
+            if(ronda==partida){ 
+                dispose();
+                Estadisticas();          
+            }
+            ImageIcon icono  = new ImageIcon("src/"+ronda+".png");
+            lblNumRonda.setIcon(icono);
+            ImprimeTablero();   
+        }
+        else if(temporal=='o'){
+            jugadorT.setPuntaje2();
+            JOptionPane.showMessageDialog(null,"El jugador "+ jugadorT.getNombre2() + " gano¡");
+            turno=0;
+            tablero.reiniciarTablero();
+            ronda++;
+            if(ronda==partida){ 
+                dispose();
+                Estadisticas();}
             ImageIcon icono  = new ImageIcon("src/"+ronda+".png");
             lblNumRonda.setIcon(icono);
             ImprimeTablero();
             
         }
+    }
+    
+    public void Estadisticas(){
+        String ganador="";
+        if(jugadorT.getPuntaje1()< jugadorT.getPuntaje2()){
+            ganador= "el ganador es : "+jugadorT.getNombre2();
+        }
+        else if(jugadorT.getPuntaje1()> jugadorT.getPuntaje2()){
+            ganador= "el ganador es : "+jugadorT.getNombre1();
+        }
+        else if(jugadorT.getPuntaje2()== jugadorT.getPuntaje1()){
+            ganador= "Empate entre  "+jugadorT.getNombre1()+" y "+jugadorT.getNombre2();
+        }
+        JOptionPane.showMessageDialog(null,"ESTADISTICAS:\nRondas Jugadas:"+(ronda-1)+"\n"
+                + "Puntaje Jugador 1 "+jugadorT.getNombre1()+" :"+jugadorT.getPuntaje1()+"\n"
+                + "Puntaje Jugador 2 "+jugadorT.getNombre2()+" :"+jugadorT.getPuntaje2()+"\n"
+                + ganador
+                );
     }
     
     
