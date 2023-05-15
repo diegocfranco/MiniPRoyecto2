@@ -12,6 +12,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import Modelo.Jugador;
+import Logica.Tablero;
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,6 +25,8 @@ public class VentanaJuego extends JFrame{
     private PanelConImagen jpFondoJuego;
     private JLabel lblJugador1;
     private JLabel lblJugador2;
+    private JLabel lblNomJugador1;
+    private JLabel lblNomJugador2;    
     private JLabel label1 ;
     private JLabel label2 ;
     private JLabel label3 ;
@@ -33,10 +39,16 @@ public class VentanaJuego extends JFrame{
     private JLabel lblRonda;
     private JLabel lblNumRonda;
     private JButton btnFinalizar;
+    private Jugador jugadorT;
+    private Tablero tablero;
+    private int turno; 
+    private int ronda;
     
     
     
-     public VentanaJuego(){
+     public VentanaJuego(Jugador jugador){
+        jugadorT = jugador;
+        tablero = new Tablero();
         iniciarComponentes();
     }
     
@@ -48,6 +60,8 @@ public class VentanaJuego extends JFrame{
         setLocationRelativeTo(null);
         setVisible(true); 
         setResizable(false);
+        ronda =1;
+        turno=0;
  
         Toolkit miPantalla = Toolkit.getDefaultToolkit();
         
@@ -60,6 +74,8 @@ public class VentanaJuego extends JFrame{
         lblRonda = new JLabel();
         lblJugador1 = new JLabel();
         lblJugador2 = new JLabel();
+        lblNomJugador1 = new JLabel(jugadorT.getNombre1());
+        lblNomJugador2 = new JLabel(jugadorT.getNombre2());        
         label1 = new JLabel();
         label2 = new JLabel();
         label3 = new JLabel();
@@ -83,40 +99,31 @@ public class VentanaJuego extends JFrame{
         icono = new ImageIcon("src/Jugador2.png");
         lblJugador2.setIcon(icono);
         lblJugador2.setBounds(500,300, 291,94);
+        
+        
+        lblNomJugador1.setFont(new Font("arial", 1, 50)); 
+        lblNomJugador1.setForeground(new Color(250,250,250));
+        lblNomJugador1.setBounds(530,250, 291,94);
+            
+        lblNomJugador2.setBounds(530,350, 291,94);
+        lblNomJugador2.setFont(new Font("arial", 1, 50)); 
+        lblNomJugador2.setForeground(new Color(250,250,250));
 
         
         lblNumRonda.setBounds(620,130, 41,41);
-        icono = new ImageIcon("src/1.png");
+        icono = new ImageIcon("src/"+ronda+".png");
         lblNumRonda.setIcon(icono);
         
         label1.setBounds(30,55, 145,145);
-        icono = new ImageIcon("src/cuadro.png");
-        label1.setIcon(icono);        
-        
         label2.setBounds(191,55, 145,145);
-        label2.setIcon(icono);
-        
         label3.setBounds(350,55, 145,145);
-        label3.setIcon(icono);
-        
         label4.setBounds(30,213, 145,145);
-        label4.setIcon(icono);
-        
         label5.setBounds(191,213, 145,145);
-        label5.setIcon(icono);
-        
         label6.setBounds(350,213, 145,145);
-        label6.setIcon(icono);    
-
         label7.setBounds(30,371, 145,145);
-        label7.setIcon(icono);
-        
         label8.setBounds(191,371, 145,145);
-        label8.setIcon(icono);
-        
         label9.setBounds(350,371, 145,145);
-        label9.setIcon(icono);
-        
+
         icono = new ImageIcon("src/finalizar.png");
         btnFinalizar.setIcon(icono);
         btnFinalizar.setContentAreaFilled(false);
@@ -125,6 +132,8 @@ public class VentanaJuego extends JFrame{
         
         jpFondoJuego.add( lblJugador1);        
         jpFondoJuego.add( lblJugador2);        
+        jpFondoJuego.add( lblNomJugador1);        
+        jpFondoJuego.add( lblNomJugador2); 
         jpFondoJuego.add( label1);
         jpFondoJuego.add( label2);
         jpFondoJuego.add( label3);
@@ -150,10 +159,50 @@ public class VentanaJuego extends JFrame{
         label8.addMouseListener(manejadorEventos);
         label9.addMouseListener(manejadorEventos);        
         
-        
- 
-        
+       
 }
+    public void alguienGano(){
+        
+        if(tablero.ganador()){
+            JOptionPane.showMessageDialog(null,"alguien gano¡");
+            turno=0;
+            tablero.reiniciarTablero();
+            ronda++;
+            ImageIcon icono  = new ImageIcon("src/"+ronda+".png");
+            lblNumRonda.setIcon(icono);
+            ImprimeTablero();
+            
+        }
+    }
+    
+    
+    public void ImprimeTablero(){
+       
+        ImageIcon icono = new ImageIcon("src/"+ tablero.getPosTablero(0,0)+".png");
+        label1.setIcon(icono);
+        icono = new ImageIcon("src/"+ tablero.getPosTablero(0,1)+".png");
+        label2.setIcon(icono);
+        icono = new ImageIcon("src/"+ tablero.getPosTablero(0,2)+".png");
+        label3.setIcon(icono);
+        icono = new ImageIcon("src/"+ tablero.getPosTablero(1,0)+".png");        
+        label4.setIcon(icono);
+        icono = new ImageIcon("src/"+ tablero.getPosTablero(1,1)+".png");        
+        label5.setIcon(icono);
+        icono = new ImageIcon("src/"+ tablero.getPosTablero(1,2)+".png");        
+        label6.setIcon(icono);
+        icono = new ImageIcon("src/"+ tablero.getPosTablero(2,0)+".png");        
+        label7.setIcon(icono);
+        icono = new ImageIcon("src/"+ tablero.getPosTablero(2,1)+".png");        
+        label8.setIcon(icono);
+        icono = new ImageIcon("src/"+ tablero.getPosTablero(2,2)+".png");        
+        label9.setIcon(icono);
+               
+    
+    }
+    
+    
+    
+    
         class ManejadorDeEventos implements ActionListener, KeyListener,MouseListener{
         @Override
         public void actionPerformed(ActionEvent evento){           
@@ -184,31 +233,58 @@ public class VentanaJuego extends JFrame{
         public void mouseClicked(MouseEvent e) {
             
             if(e.getSource() == label1){
-                label1.setIcon(new ImageIcon("src/x.png"));
+                tablero.fichaPorTurno(turno,0,0);
+                ImprimeTablero();
+                turno++;
+                alguienGano();
             }
             if(e.getSource() == label2){
-                label2.setIcon(new ImageIcon("src/o.png"));
+                tablero.fichaPorTurno(turno,0,1);
+                ImprimeTablero();
+                turno++;
+                alguienGano();
             }
             if(e.getSource() == label3){
-                label3.setIcon(new ImageIcon("src/x.png"));
+                tablero.fichaPorTurno(turno,0,2);
+                ImprimeTablero();
+                turno++;
+                alguienGano();
             }
             if(e.getSource() == label4){
-                label4.setIcon(new ImageIcon("src/o.png"));
+                tablero.fichaPorTurno(turno,1,0);
+                ImprimeTablero();
+                turno++;
+                alguienGano();
             }
             if(e.getSource() == label5){
-                label5.setIcon(new ImageIcon("src/x.png"));
+                tablero.fichaPorTurno(turno,1,1);
+                ImprimeTablero();
+                turno++;
+                alguienGano();
             }
             if(e.getSource() == label6){
-                label6.setIcon(new ImageIcon("src/o.png"));
+                tablero.fichaPorTurno(turno,1,2);
+                ImprimeTablero();
+                turno++;
+                alguienGano();
             }
             if(e.getSource() == label7){
-                label7.setIcon(new ImageIcon("src/x.png"));
+                tablero.fichaPorTurno(turno,2,0);
+                ImprimeTablero();
+                turno++;
+                alguienGano();
             }
             if(e.getSource() == label8){
-                label8.setIcon(new ImageIcon("src/o.png"));
+                tablero.fichaPorTurno(turno,2,1);
+                ImprimeTablero();
+                turno++;
+                alguienGano();
             }
             if(e.getSource() == label9){
-                label9.setIcon(new ImageIcon("src/x.png"));
+                tablero.fichaPorTurno(turno,2,2);
+                ImprimeTablero();
+                turno++;
+                alguienGano();
             }            
                 
           

@@ -225,7 +225,7 @@ public final class PanelNombres extends JFrame {
             Jugador jugador = new Jugador(nombre);
             dispose();
             JOptionPane.showMessageDialog(null,numeroRonda);
-            VentanaJuego VentanaUnJugador = new VentanaJuego(); 
+            VentanaJuego VentanaUnJugador = new VentanaJuego(jugador); 
           
         } 
         else {
@@ -240,11 +240,11 @@ public final class PanelNombres extends JFrame {
         String nombre2 =jTextJugador2.getText();
         if(!nombre1.trim().isEmpty()&!nombre2.trim().isEmpty() ){
             //pasar nombre y numero de rondas
-            Jugador jugador1 = new Jugador(nombre1);
-            Jugador jugador2 = new Jugador(nombre2);
+            Jugador jugador = new Jugador(nombre1,nombre2);
+            
             dispose();
             JOptionPane.showMessageDialog(null,numeroRonda);
-            VentanaJuego VentanaUnJugador = new VentanaJuego(); 
+            VentanaJuego VentanaUnJugador = new VentanaJuego(jugador); 
           
         } 
         else {
